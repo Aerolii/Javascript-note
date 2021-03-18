@@ -1,0 +1,27 @@
+/*
+ * @Author: wenyu_zxb
+ * @Date: 2021-03-01 23:25:03
+ * @LastEditTime: 2021-03-17 23:59:17
+ * @LastEditors: wenyu_zxb
+ * @Description:Typescript 配置文件
+ * @FilePath: /TypeScript/ts-test-project/tsconfig.json
+ */
+{
+  "include": ["./src/**/*"], // src下所有目录下文件,
+  "exclude": [], // 配置不编译选项
+  "compilerOptions": {
+    // 编译配置项
+    "target": "es5", // 编译版本
+    "module": "ES2015", // 模块化规范
+    "outDir": "./dist", // 输出目录
+    "allowJs": false, // 是否编译js
+    "checkJs": false, // 是否检查js
+    "removeComments": true, // 是否移除注释 默认值false
+    "noEmitOnError": true, // 错误时不编译
+    "strict": true, // 开启所有严格检查
+    "alwaysStrict": true, // 编译后脚本是否使用严格模式 默认false
+    "noImplicitAny": true, // 是否不允许隐式any类型 默认false
+    "noImplicitThis": true, // 不允许不明确的this
+    "strictNullChecks": true // 严格检查空值
+  }
+}
