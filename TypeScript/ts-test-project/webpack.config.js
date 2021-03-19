@@ -1,10 +1,10 @@
 /*
  * @Author: wenyu_zxb
  * @Date: 2021-03-17 23:50:17
- * @LastEditTime: 2021-03-18 14:27:52
+ * @LastEditTime: 2021-03-18 22:17:47
  * @LastEditors: wenyu_zxb
  * @Description:webpack配置typescript
- * @FilePath: /TypeScript/ts-test-project/webpack.config.js
+ * @FilePath: /ts-test-project/webpack.config.js
  */
 
 const path = require('path')
@@ -47,12 +47,28 @@ module.exports = {
         ]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.scss$/i,
         use: [
           // Creates `style` nodes from JS strings
           'style-loader',
           // Translates CSS into CommonJS
           'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      // 最新2个版本
+                      browsers: 'last 2 versions'
+                    }
+                  ]
+                ]
+              }
+            }
+          },
           // Compiles Sass to CSS
           'sass-loader'
         ]
