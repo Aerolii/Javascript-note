@@ -1,12 +1,3 @@
-/*
- * @Author: wenyu_zxb
- * @Date: 2021-03-02 00:07:47
- * @LastEditTime: 2021-03-29 17:12:09
- * @LastEditors: Bob
- * @Description:webpack 配置typescript打包配置信息
- * @FilePath: /Javascript/study-note/TypeScript/ts-webpack/webpack.config.js
- */
-
 // 导入path包
 const path = require('path')
 // 导入html - webpack - plugin插件
@@ -15,22 +6,20 @@ const HTMLWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
-  // 配置入口信息
-  entry: path.resolve(__dirname, 'src/index.ts'),
-  // 配置打包信息
+  entry: path.resolve(__dirname, 'src/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'boundle.js',
-    // 配置webpack不使用箭头函数
+    // filename: 'boundle.js',
     environment: {
-      arrowFunction: false
+      arrowFunction: false,
+      const: false
     }
   },
   // 配置打包模块，针对loader
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.js$/,
         use: [
           {
             loader: 'babel-loader',
@@ -55,8 +44,7 @@ module.exports = {
                 ]
               ]
             }
-          },
-          'ts-loader'
+          }
         ]
       }
     ]
@@ -71,6 +59,31 @@ module.exports = {
   ],
   // 设置引用模块
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.js']
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minRemainingSize: 0,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10,
+          reuseExistingChunk: true,
+          filename: '[name].bundle.js'
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
   }
 }
